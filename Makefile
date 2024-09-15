@@ -1,6 +1,6 @@
 # Define variables
 GO_BUILD_CMD = go build -o ./tmp/main.exe .
-TAILWIND_CMD = .\bin\tailwindcss.exe -i .\public\index.css -o .\public\output.css --minify
+TAILWIND_CMD = .\bin\tailwindcss.exe -i .\public\style.css -o .\public\output.css
 
 # Default target
 all: build tailwind
