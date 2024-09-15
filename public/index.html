@@ -6,38 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GO Leaderboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel='stylesheet' href='./css/scrollbar.css'>
     <!-- <link rel="stylesheet" href="./output.css"> --> <!-- Local Tailwind CSS some how not working -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"> -->
 
 </head>
 
 <body class='bg-[#111827]'>
-    <main class='p-10 pt-20'>
-        <h1 class='mb-10 text-4xl font-black text-center text-white'>Leaderboard</h1>
-        <div id='top-3'
-            class="flex justify-center align-bottom gap-6 max-phone:gap-6 phone:gap-12 phone:w-4/6 w-11/12 mx-auto h-fit">
+    <main
+        class='w-screen max-h-screen min-h-screen flex flex-col flex-shrink gap-10 align-bottom px-10 pt-20 pb-10 overflow-x-hidden'>
+        <h1 class='text-4xl font-black text-center text-white shrink-0'>Leaderboard</h1>
+        <div id='top-3' class="flex justify-center align-bottom gap-6 w-11/12 mx-auto h-fit shrink-0">
         </div>
 
-        <div class='w-full flex justify-center'>
-            <div class="mt-20 w-1/2 relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 w-0">
-                                #Rank
-                            </th>
-                            <th scope="col" class="px-6 py-3 w-0">
-                                Score
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Player
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id='leaderboard-table'>
-                    </tbody>
-                </table>
-            </div>
+        <div class='h-full w-1/2 mx-auto overflow-auto shrink-[10] rounded-lg'>
+            <table class="max-h-full w-full text-sm text-left text-gray-500 border-collapse">
+                <thead class="">
+                    <tr>
+                        <th scope="col" class="sticky top-0 px-6 py-3 w-0 text-xs text-gray-700 uppercase bg-gray-300">
+                            #Rank
+                        </th>
+                        <th scope="col" class="sticky top-0 px-6 py-3 w-0 text-xs text-gray-700 uppercase bg-gray-300">
+                            Score
+                        </th>
+                        <th scope="col" class="sticky top-0 px-6 py-3 text-xs text-gray-700 uppercase bg-gray-300">
+                            Player
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id='leaderboard-table' class=''>
+                </tbody>
+            </table>
         </div>
 
     </main>

@@ -9,6 +9,9 @@ const players = [
     { name: 'Mars', score: 9, place: 5 },
     { name: 'Venus', score: 8, place: 6 },
     { name: 'Jupiter', score: 10, place: 7 },
+    { name: 'Jupiter', score: 10, place: 7 },
+    { name: 'Jupiter', score: 10, place: 7 },
+    { name: 'Jupiter', score: 10, place: 7 },
 ];
 
 const crownArray = [
