@@ -12,10 +12,51 @@
 
 <body class='bg-[#111827]'>
     <main class='p-10 pt-20'>
-        <h1 class='mb-10 text-4xl font-black text-center text-white'>GO Real-Time Leaderboard</h1>
+        <h1 class='mb-10 text-4xl font-black text-center text-white'>Leaderboard</h1>
         <div id='top-3'
             class="flex justify-center align-bottom gap-6 max-phone:gap-6 phone:gap-12 phone:w-4/6 w-11/12 mx-auto h-fit">
         </div>
+
+        <div class='w-full flex justify-center'>
+            <div class="mt-20 w-1/2 relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 w-0">
+                                #Rank
+                            </th>
+                            <th scope="col" class="px-6 py-3 w-0">
+                                Score
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Player
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+                                4
+                            </th>
+                            <td class="px-6 py-4 text-white">
+                                7
+                            </td>
+                            <th scope="row" class="flex items-center px-6 py-4 whitespace-nowrap text-white">
+                                <img class="w-10 h-10 rounded-full border"
+                                    src="https://api.dicebear.com/9.x/micah/svg?seed=" alt="Jese image">
+                                <div class="ml-5 ps-3">
+                                    <div class="text-base font-semibold">Neil Sims</div>
+                                </div>
+                            </th>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </main>
     <script src="./script.js"></script>
 </body>

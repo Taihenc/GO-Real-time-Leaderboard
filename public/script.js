@@ -1,9 +1,13 @@
 const top3_div = document.querySelector('#top-3');
 
-const top3 = [
+const players = [
     { name: 'John', score: 10, place: 1 },
     { name: 'Doe', score: 9, place: 2 },
-    { name: 'Jane', score: 8, place: 3 }
+    { name: 'Jane', score: 8, place: 3 },
+    { name: 'Atom', score: 10, place: 4 },
+    { name: 'Mars', score: 9, place: 5 },
+    { name: 'Venus', score: 8, place: 6 },
+    { name: 'Jupiter', score: 10, place: 7 },
 ];
 
 const crownArray = [
@@ -57,4 +61,15 @@ function top3ToHTML(user) {
     `
 }
 
-top3_div.innerHTML = top3.map((user, index) => top3ToHTML(user)).join('');   
+
+function updateLeaderboard() {
+    for (let i = 0; i < players.length; i++) {
+        if (players[i].place <= 3) {
+            top3_div.innerHTML += top3ToHTML(players[i]);
+        } else
+            break;
+    }
+    top3_div.innerHTML = top3.map((user, index) => top3ToHTML(user)).join('');
+}
+
+updateLeaderboard();
