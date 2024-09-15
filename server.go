@@ -3,27 +3,24 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
+
+	"github.com/Taihenc/GO-Real-time-Leaderboard/src/multiplexer"
+	"github.com/joho/godotenv"
 )
 
-const PORT = 8080
-
-var fileServer = http.FileServer(http.Dir("public"))
-
-func servePublic(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/" {
-		http.ServeFile(w, r, "./public/index.html")
-		return
-	}
-	fileServer.ServeHTTP(w, r)
-}
-
 func main() {
-	mux := http.NewServeMux()
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
 
-	mux.HandleFunc("/", servePublic)
+	PORT := os.Getenv("PORT")
 
-	fmt.Println("Server started on port 8080")
-	if err := http.ListenAndServe(fmt.Sprintf(":%d", PORT), mux); err != nil {
+	multiplexer.Initialize()
+
+	fmt.Println("Server is running on port", PORT, "at http://localhost:"+PORT)
+	if err := http.ListenAndServe(":"+PORT, multiplexer.Mux); err != nil {
 		fmt.Println(err)
 	}
 }
