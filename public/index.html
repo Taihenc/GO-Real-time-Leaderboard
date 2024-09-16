@@ -23,19 +23,18 @@
             </a>
 
             <div class="relative flex items-center align-middle gap-4">
-                <label class="z-40 cursor-pointer" for="login-menu">
-                    <input class="peer hidden" type="checkbox" id="login-menu" />
-                    <div class="text-gray-400 hover:text-white select-none">Login</div>
-                    <!-- Dropdown -->
-                    <div
-                        class='fixed w-[20rem] top-0 right-0 mt-20 mr-10 px-4 py-6 bg-[rgba(0,0,0,0.3)] rounded-lg opacity-0 peer-checked:opacity-100 invisible peer-checked:visible transition-opacity'>
-                        <div id='player-input' class='flex flex-col justify-center gap-2'>
+                <button id='login-btn' class="text-gray-400 hover:text-white select-none">Login</button>
+                <!-- Dropdown -->
+                <div id='login-dropdown'
+                    class='fixed w-[20rem] top-0 right-0 mt-20 mr-10 px-4 py-6 bg-[rgba(0,0,0,0.3)] rounded-lg opacity-0 invisible transition-opacity'>
+                    <form onsubmit='return login()'>
+                        <div class='flex flex-col justify-center gap-2'>
                             <div class="flex">
                                 <span
                                     class="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                                     <img src='./assets/game.svg' class='w-6 h-6'>
                                 </span>
-                                <input type="text" id=""
+                                <input type="text" id="login-username"
                                     class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Username">
                             </div>
@@ -44,30 +43,31 @@
                                     class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                                     <img src='./assets/star.png' class='w-4 h-4'>
                                 </span>
-                                <input type="text" id=""
+                                <input type="password" id="login-password"
                                     class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Password">
                             </div>
                             <button type="button"
                                 class="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                         </div>
-                    </div>
-                </label>
-                <label class="z-40 cursor-pointer" for="register-menu">
-                    <input class="peer hidden" type="checkbox" id="register-menu" />
-                    <div
-                        class="px-6 py-2 text-gray-400 hover:text-gray-700 hover:bg-gray-300 border border-white rounded-lg select-none">
-                        Register</div>
-                    <!-- Dropdown -->
-                    <div
-                        class='fixed w-[20rem] top-0 right-0 mt-20 mr-10 px-4 py-6 bg-[rgba(0,0,0,0.3)] rounded-lg opacity-0 peer-checked:opacity-100 invisible peer-checked:visible transition-opacity'>
-                        <div id='player-input' class='flex flex-col justify-center gap-2'>
+                    </form>
+                </div>
+
+                <button id='register-btn'
+                    class="px-6 py-2 text-gray-400 hover:text-gray-700 hover:bg-gray-300 border border-white rounded-lg select-none">
+                    Register
+                </button>
+                <!-- Dropdown -->
+                <div id='register-dropdown'
+                    class='fixed w-[20rem] top-0 right-0 mt-20 mr-10 px-4 py-6 bg-[rgba(0,0,0,0.3)] rounded-lg opacity-0 invisible transition-opacity'>
+                    <form onsubmit='return register()'>
+                        <div class='flex flex-col justify-center gap-2'>
                             <div class="flex">
                                 <span
                                     class="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                                     <img src='./assets/game.svg' class='w-6 h-6'>
                                 </span>
-                                <input type="text" id=""
+                                <input type="text" id="register-username"
                                     class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Username">
                             </div>
@@ -76,15 +76,24 @@
                                     class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                                     <img src='./assets/star.png' class='w-4 h-4'>
                                 </span>
-                                <input type="text" id=""
+                                <input type="password" id="register-password"
                                     class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Password">
                             </div>
-                            <button type="button"
+                            <div class="flex">
+                                <span
+                                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    <img src='./assets/star.png' class='w-4 h-4'>
+                                </span>
+                                <input type="password" id="register-password-confirm"
+                                    class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Confirm password">
+                            </div>
+                            <button type="button" onclick='register()'
                                 class="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                         </div>
-                    </div>
-                </label>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>
@@ -139,6 +148,8 @@
 
     </main>
     <script src="./script.js"></script>
+    <script src="./scripts/nav.js"></script>
+    <script src="./scripts/auth.js"></script>
 </body>
 
 </html>
