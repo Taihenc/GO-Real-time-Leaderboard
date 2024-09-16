@@ -10,3 +10,8 @@ type AddScoreRequest struct {
 	PlayerName string
 	Score      int
 }
+
+type RegisterUserRequest struct {
+	Username string
+	Password string
+}
