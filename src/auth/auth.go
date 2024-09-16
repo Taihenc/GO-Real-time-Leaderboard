@@ -43,8 +43,20 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Error saving user", http.StatusInternalServerError)
 			return
 		}
+		// Generate a JWT token if registration is successful
+
+		tokenString, err := GenerateToken(user.Username)
+		if err != nil {
+			http.Error(w, "Error generating token", http.StatusInternalServerError)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("User registered successfully!"))
+		json.NewEncoder(w).Encode(map[string]string{
+			"message": "Login successful!",
+			"token":   tokenString,
+		})
 		return
 	}
 	http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -77,19 +89,32 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Generate a JWT token if the credentials are correct
-		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-			"username": user.Username,
-			"exp":      time.Now().Add(time.Hour * 72).Unix(), // Token expires in 72 hours
-		})
-
-		tokenString, err := token.SignedString(jwtSecret)
+		tokenString, err := GenerateToken(user.Username)
 		if err != nil {
 			http.Error(w, "Error generating token", http.StatusInternalServerError)
 			return
 		}
 
-		fmt.Fprintf(w, "Login successful! Token: %s", tokenString)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(map[string]string{
+			"message": "Login successful!",
+			"token":   tokenString,
+		})
 		return
 	}
 	http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+}
+
+func GenerateToken(username string) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"username": username,
+		"exp":      time.Now().Add(time.Hour * 72).Unix(), // Token expires in 72 hours
+	})
+
+	tokenString, err := token.SignedString(jwtSecret)
+	if err != nil {
+		return "", err
+	}
+	return tokenString, nil
 }

@@ -27,10 +27,34 @@ function register() {
         body: JSON.stringify({ username, password }),
     })
         .then((res) => {
-            res.text().then((text) => alert(text));
-            if (res.status === 200) {
-                // reload the page
-                window.location.reload();
-            }
+            responseHandler(res);
         })
+}
+
+function login() {
+    const username = document.querySelector('#login-username').value;
+    const password = document.querySelector('#login-password').value;
+
+    fetch('/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    })
+        .then((res) => {
+            responseHandler(res);
+        })
+}
+
+function responseHandler(res) {
+    if (res.status === 200) {
+        res.body.getReader().read().then(({ value }) => {
+            const token = new TextDecoder().decode(value);
+            localStorage.setItem('token', token);
+            window.location.reload();
+        });
+    } else {
+        res.text().then((text) => alert(text));
+    }
 }
