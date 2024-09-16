@@ -29,9 +29,32 @@
         </div>
     </nav>
     <main
-        class='w-screen max-h-screen min-h-screen flex flex-col flex-shrink gap-10 align-bottom px-10 pt-20 pb-10 overflow-x-hidden'>
+        class='w-screen max-h-screen min-h-screen flex flex-col flex-shrink align-bottom px-10 pt-20 pb-10 overflow-x-hidden'>
         <h1 class='text-4xl font-black text-center text-gray-300 shrink-0'>Leaderboard</h1>
         <div id='top-3' class="flex justify-center align-bottom gap-6 w-11/12 mx-auto h-fit shrink-0">
+        </div>
+
+        <div id='player-input' class='my-5 w-1/2 mx-auto flex justify-center gap-2'>
+            <div class="flex">
+                <span
+                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <img src='./assets/game.svg' class='w-6 h-6'>
+                </span>
+                <input type="text" id=""
+                    class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Game">
+            </div>
+            <div class="flex">
+                <span
+                    class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <img src='./assets/star.png' class='w-4 h-4'>
+                </span>
+                <input type="text" id=""
+                    class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Score">
+            </div>
+            <button type="submit"
+                class="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
         </div>
 
         <div class='h-full w-1/2 mx-auto overflow-auto shrink-[10] rounded-lg'>
