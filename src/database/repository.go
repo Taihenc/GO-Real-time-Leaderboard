@@ -40,3 +40,13 @@ func RegisterUser(username string, hashedPassword []byte) error {
 	fmt.Println("User registered successfully!")
 	return nil
 }
+
+func GetHashedPassword(username string) ([]byte, error) {
+	_client := getRedisClient()
+
+	hashedPassword, err := _client.Get(ctx, "user:"+username).Bytes()
+	if err != nil {
+		return nil, err
+	}
+	return hashedPassword, nil
+}

@@ -10,5 +10,6 @@ import (
 func Init(mux *http.ServeMux) {
 	mux.HandleFunc("/", handler.ServePublic)
 	mux.HandleFunc("/add_score", handler.AddScore)
-	mux.HandleFunc("/register", auth.RegisterUser)
+	mux.HandleFunc("/auth/register", auth.RegisterUser)
+	mux.HandleFunc("/auth/login", auth.LoginUser)
 }
