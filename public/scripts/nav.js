@@ -47,6 +47,6 @@ if (username) {
         </span>
         <img class="w-10 h-10 rounded-full border"
             src="${"https://api.dicebear.com/9.x/micah/svg?seed=" + username}" alt="Profile">
-        <button id="logout-btn" class="px-6 py-2 text-gray-400 hover:text-gray-700 hover:bg-gray-300 border border-white rounded-lg select-none">Logout</button>
+        <button id="logout-btn" onclick="logout()" class="px-6 py-2 text-gray-400 hover:text-gray-700 hover:bg-gray-300 border border-white rounded-lg select-none">Logout</button>
     `;
 }

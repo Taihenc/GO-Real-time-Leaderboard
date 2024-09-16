@@ -6,6 +6,12 @@ function getUsername() {
     const payload = token.split('.')[1];
     const base64 = payload.replace('-', '+').replace('_', '/');
     const user = JSON.parse(window.atob(base64));
+
+    if (user.exp < Date.now() / 1000) {
+        localStorage.removeItem('token');
+        return null;
+    }
+
     return user.username;
 }
 
@@ -45,6 +51,11 @@ function login() {
         .then((res) => {
             responseHandler(res);
         })
+}
+
+function logout() {
+    localStorage.removeItem('token');
+    window.location.reload();
 }
 
 function responseHandler(res) {
