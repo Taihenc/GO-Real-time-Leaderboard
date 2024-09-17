@@ -67,15 +67,17 @@ function getPlayerInLeaderboard(game) {
     fetch('/leaderboard')
         .then((res) => res.json())
         .then((data) => {
+            if (!data || data.length === 0) {
+                alert('No data found for this game');
+                return;
+            }
             let players = []
-            console.log("data", data[0].PlayerName);
             for (let i = 0; i < data.length; i++) {
                 players.push({
                     name: data[i].PlayerName,
                     score: data[i].Score,
                     place: i + 1
                 });
-                console.log("players", players);
             }
             updateLeaderboard(players);
         });
