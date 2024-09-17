@@ -11,7 +11,7 @@ import (
 func GetScoreboard(game string) ([]model.LeaderboardRecord, error) {
 	_client := getRedisClient()
 
-	records, err := _client.ZRevRangeWithScores(ctx, game, 0, 9).Result()
+	records, err := _client.ZRevRangeWithScores(ctx, game, 0, -1).Result()
 	if err != nil {
 		fmt.Println("Error getting leaderboard")
 		return nil, err
