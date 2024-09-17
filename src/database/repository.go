@@ -67,3 +67,14 @@ func GetHashedPassword(username string) ([]byte, error) {
 	}
 	return hashedPassword, nil
 }
+
+func GetGameList() ([]string, error) {
+	_client := getRedisClient()
+
+	// get all games name from LIST with key "GameList"
+	games, err := _client.LRange(ctx, "GameList", 0, -1).Result()
+	if err != nil {
+		return nil, err
+	}
+	return games, nil
+}

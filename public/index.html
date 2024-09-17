@@ -103,7 +103,23 @@
         <div id='top-3' class="flex justify-center align-bottom gap-6 w-11/12 mx-auto h-fit shrink-0">
         </div>
 
-        <div id='submit-div' class='my-5 '></div>
+        <div class='my-5 '>
+            <form onsubmit='submitScore(); return false'>
+                <div id='player-input' class='w-1/2 mx-auto flex justify-center gap-2'>
+                    <div class="flex w-[12rem]">
+                        <span
+                            class="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <img src='./assets/game.svg' class='w-6 h-6'>
+                        </span>
+                        <select id="game-select"
+                            class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="Game">Game</option>
+                        </select>
+
+                    </div>
+                </div>
+            </form>
+        </div>
 
         <div class='h-full w-1/2 mx-auto overflow-auto shrink-[10] rounded-lg'>
             <table class="max-h-full w-full text-sm text-left text-gray-500 border-collapse">

@@ -10,6 +10,7 @@ import (
 func Init(mux *http.ServeMux) {
 	mux.HandleFunc("/", handler.ServePublic)
 	mux.HandleFunc("/leaderboard", handler.GetScoreboard)
+	mux.HandleFunc("/gamelist", handler.GetGameList)
 	mux.HandleFunc("/submit-score", handler.AddScore)
 	mux.HandleFunc("/auth/register", auth.RegisterUser)
 	mux.HandleFunc("/auth/login", auth.LoginUser)

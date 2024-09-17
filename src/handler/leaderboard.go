@@ -39,8 +39,14 @@ func AddScore(w http.ResponseWriter, r *http.Request) {
 
 func GetScoreboard(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
+		gameName := r.URL.Query().Get("game")
+		if gameName == "" {
+			http.Error(w, "Game name is required", http.StatusBadRequest)
+			return
+		}
+
 		var scoreboard = []model.LeaderboardRecord{}
-		scoreboard, err := database.GetScoreboard("Game")
+		scoreboard, err := database.GetScoreboard(gameName)
 		if err != nil {
 			http.Error(w, "Error getting leaderboard", http.StatusInternalServerError)
 			fmt.Println(err)
@@ -50,6 +56,23 @@ func GetScoreboard(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(scoreboard)
+		return
+	}
+}
+
+func GetGameList(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		var games = []string{}
+		games, err := database.GetGameList()
+		if err != nil {
+			http.Error(w, "Error getting game list", http.StatusInternalServerError)
+			fmt.Println(err)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(games)
 		return
 	}
 }
