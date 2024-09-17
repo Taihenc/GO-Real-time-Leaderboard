@@ -3,7 +3,6 @@ const top3_div = document.querySelector('#top-3');
 const leaderboard_table = document.querySelector('#leaderboard-table');
 
 var players = [];
-var lastUpdated = new Map();
 
 // flow: get username -> get game list -> get game in query(if there is) -> get player in leaderboard
 (async () => {
@@ -33,9 +32,10 @@ var lastUpdated = new Map();
     setInterval(async () => {
         const game = document.querySelector('#game-select').value;
         const lastUpdateTime = await getLastUpdateTime(game);
-        if (lastUpdateTime && lastUpdated.get(game) !== lastUpdateTime) {
+        console.log(lastUpdateTime, getLocalLastUpdateTime(game));
+        if (lastUpdateTime && getLocalLastUpdateTime(game) !== lastUpdateTime) {
             getPlayerInLeaderboard(game);
-            lastUpdated.set(game, lastUpdateTime);
+            setLocalLastUpdateTime(game, lastUpdateTime);
         }
     }, 2000);
 })();
@@ -63,7 +63,7 @@ async function getGameList() {
 
 async function getLastUpdateTime(game) {
     try {
-        let lastUpdateTime = 0;
+        let lastUpdateTime = '';
         await fetch('/lastupdate' + '?game=' + game)
             .then((res) => res.json())
             .then((data) => {
@@ -73,6 +73,17 @@ async function getLastUpdateTime(game) {
     } catch (error) {
         return undefined;
     }
+}
+
+function getLocalLastUpdateTime(game) {
+    if (localStorage.getItem("lastupdate:" + game) === null) {
+        return undefined;
+    }
+    return localStorage.getItem("lastupdate:" + game);
+}
+
+function setLocalLastUpdateTime(game, time) {
+    localStorage.setItem("lastupdate:" + game, time);
 }
 
 function setSelectedGameFromQuery() {
