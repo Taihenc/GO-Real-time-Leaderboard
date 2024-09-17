@@ -164,6 +164,15 @@ function getPlayerInLeaderboard(game) {
  * @returns 
  */
 function top3ToHTML(player) {
+
+    const bg_color = (() => {
+        if (getUsername() === player.name) {
+            return 'bg-[#2563eb]'
+        } else {
+            return 'bg-[#252525]'
+        }
+    })();
+
     return `
     <div class="${placeToPt[player.place]} ${placeToOrer[player.place]}">
         <div class="relative flex justify-center flex-col items-center">
@@ -174,7 +183,7 @@ function top3ToHTML(player) {
                     alt="Profile" style="border: 3px solid ${placeToColor[player.place]};">
             </div>
             <div
-                class="bg-[#252525]  rounded-[12px] text-center gap-x-[8px] max-sm:h-[82px] sm:h-[117px] sm:w-[110px]  max-sm:w-[55px] flex flex-col items-center justify-center font-semibold tracking-[0.42px] sm:text-[14px] text-[10px]">
+                class="${bg_color}  rounded-[12px] text-center gap-x-[8px] max-sm:h-[82px] sm:h-[117px] sm:w-[110px]  max-sm:w-[55px] flex flex-col items-center justify-center font-semibold tracking-[0.42px] sm:text-[14px] text-[10px]">
                 <h2 class="text-[#fff] line-clamp-1">${player.name}</h2>
                 <h2 style="color: ${placeToColor[player.place]};">score: ${player.score}</h2>
                 <h2 class="absolute max-sm:bottom-2 bottom-3" style="color: ${placeToColor[player.place]};">#${player.place}</h2>
@@ -185,9 +194,16 @@ function top3ToHTML(player) {
 }
 
 function playerToTrHTML(player) {
+    const player_highlight = (() => {
+        if (getUsername() === player.name) {
+            return 'bg-[#2563eb] sticky top-10 bottom-0'
+        } else {
+            return ''
+        }
+    })();
     return `
     <tr
-        class="odd:bg-gray-900  even:bg-gray-800 border-b border-gray-700">
+        class="!${player_highlight} odd:bg-gray-900  even:bg-gray-800 border-b border-gray-700">
         <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
             ${player.place}
         </th>
