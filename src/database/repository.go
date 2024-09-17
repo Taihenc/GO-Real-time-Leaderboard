@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 
+	"github.com/Taihenc/GO-Real-time-Leaderboard/src/model"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -16,10 +17,16 @@ func GetScoreboard() []string {
 	return val
 }
 
-func AddScore(game string, score int, player_name string) {
+func AddScore(record model.LeaderboardRecord) error {
 	_client := getRedisClient()
 
-	_client.ZAdd(ctx, game, redis.Z{Score: float64(score), Member: player_name})
+	err := _client.ZAdd(ctx, record.Game, redis.Z{Score: float64(record.Score), Member: record.PlayerName}).Err()
+	if err != nil {
+		fmt.Println("Error adding score")
+		return err
+	}
+	fmt.Println("Score added successfully!")
+	return nil
 }
 
 func RegisterUser(username string, hashedPassword []byte) error {

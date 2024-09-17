@@ -36,9 +36,8 @@ register_btn.addEventListener('click', () => {
     }
 });
 
-const username = getUsername();
-if (username) {
-
+if (getUsername()) {
+    const username = getUsername();
     const capitalize = username.charAt(0).toUpperCase() + username.slice(1);
 
     login_register_div.innerHTML = `
