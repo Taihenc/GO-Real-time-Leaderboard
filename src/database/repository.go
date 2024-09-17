@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/Taihenc/GO-Real-time-Leaderboard/src/model"
 	"github.com/redis/go-redis/v9"
@@ -35,7 +36,16 @@ func AddScore(record model.LeaderboardRecord) error {
 		fmt.Println("Error adding score")
 		return err
 	}
+
+	// set last update time
+	err = _client.Set(ctx, "lastUpdateTime:"+record.Game, time.Now(), 0).Err()
+	if err != nil {
+		fmt.Println("Error setting last update time")
+		return err
+	}
+
 	fmt.Println("Score added successfully!")
+
 	return nil
 }
 
@@ -77,4 +87,15 @@ func GetGameList() ([]string, error) {
 		return nil, err
 	}
 	return games, nil
+}
+
+func GetLastUpdateTime(game string) (string, error) {
+	_client := getRedisClient()
+
+	lastUpdateTime, err := _client.Get(ctx, "lastUpdateTime:"+game).Result()
+	if err != nil {
+		fmt.Println("Error getting last update time")
+		return "", err
+	}
+	return lastUpdateTime, nil
 }

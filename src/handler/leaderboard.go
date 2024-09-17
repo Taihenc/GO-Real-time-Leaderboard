@@ -76,3 +76,25 @@ func GetGameList(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func GetLastUpdateTime(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		gameName := r.URL.Query().Get("game")
+		if gameName == "" {
+			http.Error(w, "Game name is required", http.StatusBadRequest)
+			return
+		}
+
+		lastUpdateTime, err := database.GetLastUpdateTime(gameName)
+		if err != nil {
+			http.Error(w, "Error getting last update time", http.StatusInternalServerError)
+			fmt.Println(err)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(lastUpdateTime)
+		return
+	}
+}

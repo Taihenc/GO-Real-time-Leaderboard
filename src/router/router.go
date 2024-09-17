@@ -12,6 +12,7 @@ func Init(mux *http.ServeMux) {
 	mux.HandleFunc("/leaderboard", handler.GetScoreboard)
 	mux.HandleFunc("/gamelist", handler.GetGameList)
 	mux.HandleFunc("/submit-score", handler.AddScore)
+	mux.HandleFunc("/lastupdate", handler.GetLastUpdateTime)
 	mux.HandleFunc("/auth/register", auth.RegisterUser)
 	mux.HandleFunc("/auth/login", auth.LoginUser)
 }
