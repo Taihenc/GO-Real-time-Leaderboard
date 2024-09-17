@@ -12,4 +12,9 @@ func ServePublic(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fileServer.ServeHTTP(w, r)
+
+	game := r.URL.Query().Get("game")
+	if game != "" {
+		GetScoreboard(w, r)
+	}
 }

@@ -36,3 +36,20 @@ func AddScore(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 }
+
+func GetScoreboard(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodGet {
+		var scoreboard = []model.LeaderboardRecord{}
+		scoreboard, err := database.GetScoreboard("Game")
+		if err != nil {
+			http.Error(w, "Error getting leaderboard", http.StatusInternalServerError)
+			fmt.Println(err)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(scoreboard)
+		return
+	}
+}

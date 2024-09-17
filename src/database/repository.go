@@ -7,14 +7,24 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-func GetScoreboard() []string {
+func GetScoreboard(game string) ([]model.LeaderboardRecord, error) {
 	_client := getRedisClient()
 
-	val, err := _client.ZRevRange(ctx, "scoreboard", 0, 9).Result()
+	records, err := _client.ZRevRangeWithScores(ctx, game, 0, 9).Result()
 	if err != nil {
-		panic(err)
+		fmt.Println("Error getting leaderboard")
+		return nil, err
 	}
-	return val
+
+	var leaderboard []model.LeaderboardRecord
+	for _, record := range records {
+		leaderboard = append(leaderboard, model.LeaderboardRecord{
+			Game:       game,
+			PlayerName: record.Member.(string),
+			Score:      int(record.Score),
+		})
+	}
+	return leaderboard, nil
 }
 
 func AddScore(record model.LeaderboardRecord) error {
