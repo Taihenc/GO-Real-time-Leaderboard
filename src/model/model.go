@@ -5,13 +5,13 @@ type Player struct {
 	Score int
 }
 
-type AddScoreRequest struct {
+type LeaderboardRecord struct {
 	Game       string
 	PlayerName string
 	Score      int
 }
 
-type RegisterUserRequest struct {
+type UserPassword struct {
 	Username string
 	Password string
 }

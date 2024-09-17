@@ -1,18 +1,20 @@
 function getUsername() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        return null;
-    }
-    const payload = token.split('.')[1];
-    const base64 = payload.replace('-', '+').replace('_', '/');
-    const user = JSON.parse(window.atob(base64));
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) return null;
+        const payload = token.split('.')[1];
+        const base64 = payload.replace('-', '+').replace('_', '/');
+        const user = JSON.parse(window.atob(base64));
 
-    if (user.exp < Date.now() / 1000) {
+        if (user.exp < Date.now() / 1000) {
+            localStorage.removeItem('token');
+            return null;
+        }
+        return user.username;
+    } catch (e) {
         localStorage.removeItem('token');
         return null;
     }
-
-    return user.username;
 }
 
 function register() {
@@ -61,7 +63,8 @@ function logout() {
 function responseHandler(res) {
     if (res.status === 200) {
         res.body.getReader().read().then(({ value }) => {
-            const token = new TextDecoder().decode(value);
+            const decoded = new TextDecoder().decode(value);
+            const token = JSON.parse(decoded).token;
             localStorage.setItem('token', token);
             window.location.reload();
         });
