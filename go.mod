@@ -1,8 +1,8 @@
 module github.com/Taihenc/GO-Real-time-Leaderboard
 
-go 1.22
+go 1.21
 
-toolchain go1.22.7
+toolchain go1.21
 
 require (
 	dario.cat/mergo v1.0.0 // indirect
