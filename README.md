@@ -1,6 +1,9 @@
-# GO-Real-time-Leaderboard
-
-Real-time Leaderboard made using GO
+<p align="center">
+    <img src="./README/home.png" alt="HOME">
+</p>
+</p>
+  <h1 align="center">GO-Real-time-Leaderboard</h1>
+</p>
 
 ## Project Requirements
 
@@ -13,3 +16,15 @@ You are to build an imaginary real-time leaderboard system that ranks users base
 -   Top Players Report: Generate reports on the top players for a specific period.
 
 src: https://roadmap.sh/projects/realtime-leaderboard-system
+
+## Notes
+
+This project aren't completely fulfill the requirements. I'm too lazy to complete it(actually only Top players report is missing). Because I already fullfilled my learning goals.
+btw you may notice it already but I didn't use any framework for frontend. because I want this to be as simple as I could.
+
+## Setup
+
+```bash
+cd go-real-time-leaderboard
+go run .
+```
