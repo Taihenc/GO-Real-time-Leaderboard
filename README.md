@@ -4,6 +4,10 @@
 </p>
   <h1 align="center">GO-Real-time-Leaderboard</h1>
 </p>
+<div align="left">
+  <img src="./README/demo2.gif" alt="demo" width="200">
+  <img src="./README/demo.gif" alt="demo" width="200">
+</div>
 
 ## Project Requirements
 
